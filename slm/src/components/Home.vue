@@ -1,17 +1,19 @@
 <template>
     <div id="entire">
-        <div id = "login">
-            <router-link class="rlink" to="/signinup">SIGN IN</router-link>
-        </div>
+        <Toolbar1></Toolbar1>
         <div id="pic">
             <img src="../../public/assets/logo.jpg" width="900" height="500"/>
         </div>
+        
     </div>
 </template>
 
 <script>
+import Toolbar1 from '../layouts/Toolbar1'
+
 export default {
     components:{
+        Toolbar1,
     }
 }
 </script>

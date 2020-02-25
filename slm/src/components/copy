@@ -4,9 +4,6 @@
       Support Lecture Machine
     </h1>
     <div class = "action">
-        <div id="logo">
-            <img src="../../public/assets/logo.png" alt="Logo" height = "300" width = "500">
-        </div>
       <div class="container" :class="{'sign-up-active' : signUp}">
         <div class="overlay-container">
           <div class="overlay">
