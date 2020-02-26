@@ -1,12 +1,14 @@
 <template id = "a">
   <div>
     <v-app-bar color="#527c70">
-        <div id="logohere">
-            <router-link class="rlink" to="/">LOGO AND GO HOME</router-link>
-        </div>
-        
-      <v-btn class="b1" to="/login">LOG IN</v-btn>
-      <v-btn class="b1" to="/signup">SIGN UP</v-btn>
+      <div id="logohere">
+          <router-link class="rlink" to="/"><v-img height="3cm" width = "5cm" src="https://drive.google.com/uc?export=download&id=1tYg9ftGsyE4TiWONKoMHEDVzr6O4mzgY"></v-img></router-link>
+      </div>
+      <v-spacer></v-spacer>
+      <v-btn class="b1" to="/login" text>About</v-btn>
+        |
+      <v-btn class="b1" to="/login" text>LOG IN</v-btn>
+      <v-btn class="b1" to="/signup" text>SIGN UP</v-btn>
 
       <v-menu left bottom></v-menu>
     </v-app-bar>
@@ -22,9 +24,6 @@ export default {
 </script>
 
 <style scoped>
-#logohere{
-    margin-right: 25cm; 
-}
 
 .rlink {
   color: #000;
@@ -35,7 +34,6 @@ export default {
 }
 
 .b1{
-    margin: 0.2cm;
     font-family: "Roboto";
     font-weight: 550;
 }
