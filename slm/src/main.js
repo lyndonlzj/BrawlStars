@@ -10,6 +10,7 @@ import SessionPage from './components/SessionPage.vue'
 import About from './components/About.vue'
 import MyAccount from './components/MyAccount.vue'
 import vuetify from './plugins/vuetify';
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false
@@ -27,7 +28,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'history',
 });
 
 new Vue({
