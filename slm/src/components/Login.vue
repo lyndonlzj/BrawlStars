@@ -6,8 +6,8 @@
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
-              <v-toolbar color="#84b5cb" dark flat>
-                <v-toolbar-title>Login</v-toolbar-title>
+              <v-toolbar color="#527c70" dark flat>
+                <v-toolbar-title class="change-font" >Login here</v-toolbar-title>
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
@@ -60,5 +60,10 @@ import Toolbar1 from '../layouts/Toolbar1'
 <style scoped>
 #a{
   background-color: #f0eddf;
+}
+
+.change-font {
+    font-family: "Roboto", Helvetica, sans-serif;
+    font-weight: bold;
 }
 </style>

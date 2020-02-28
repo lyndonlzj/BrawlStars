@@ -1,11 +1,11 @@
 <template id = "a">
   <div>
-    <v-app-bar color="#527c70">
+    <v-app-bar color="#fff">
       <div id="logohere">
-          <router-link class="rlink" to="/"><v-img height="3cm" width = "5cm" src="https://drive.google.com/uc?export=download&id=1tYg9ftGsyE4TiWONKoMHEDVzr6O4mzgY"></v-img></router-link>
+          <router-link class="rlink" to="/"><v-img height="2cm" width = "5cm" src="https://drive.google.com/uc?export=download&id=1tYg9ftGsyE4TiWONKoMHEDVzr6O4mzgY"></v-img></router-link>
       </div>
       <v-spacer></v-spacer>
-      <v-btn class="b1" to="/login" text>About</v-btn>
+      <v-btn class="b1" to="/about" text>About</v-btn>
         |
       <v-btn class="b1" to="/login" text>LOG IN</v-btn>
       <v-btn class="b1" to="/signup" text>SIGN UP</v-btn>

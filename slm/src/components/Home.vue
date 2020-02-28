@@ -1,10 +1,11 @@
 <template>
     <div id="entire">
         <Toolbar1></Toolbar1>
-        <div id="pic">
-            <img src="../../public/assets/logo.jpg" width="900" height="500"/>
+        <div id="desc">
+            Dare to ask.
+            <br>
+            <v-btn rounded color="#527c70" to="/signup">Sign up now</v-btn>
         </div>
-        
     </div>
 </template>
 
@@ -19,6 +20,14 @@ export default {
 </script>
 
 <style scoped>
+
+#desc{
+    padding: 7cm;
+    text-align: center;
+    font-family: "Roboto";
+    font-weight: 650;
+    font-size: 5rem;
+}
 
   #pic{
       position:absolute;

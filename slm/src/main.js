@@ -7,6 +7,8 @@ import Dashboard from './components/Dashboard.vue'
 import Login from './components/Login.vue'
 import SignUp from './components/SignUp.vue'
 import Session from './components/Session.vue'
+import About from './components/About.vue'
+import MyAccount from './components/MyAccount.vue'
 import vuetify from './plugins/vuetify';
 
 Vue.use(VueRouter);
@@ -18,6 +20,8 @@ const routes = [
   {path: '/login', component: Login},
   {path: '/signup', component: SignUp},
   {path: '/session', component: Session},
+  {path: '/about', component: About},
+  {path: '/myaccount', component: MyAccount},
   {path: '*', component: NotFound},
 ];
 
