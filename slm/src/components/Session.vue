@@ -7,7 +7,8 @@ export default {
   data: () => {
     return {
       moodMeter: null,
-      
+      title:"",
+      sessionID:"",
     };
   }
 };

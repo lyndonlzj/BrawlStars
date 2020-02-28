@@ -1,20 +1,22 @@
 <template>
   <div>
     <Toolbar2></Toolbar2>
-      <h2>Dashboard</h2>
-      <div id="dashboard">
-        
-      </div>
+    <h2>Dashboard</h2>
+    <div id="dashboard">
+      <User></User>
+    </div>
   </div>
 </template>
 
 <script>
-import Toolbar2 from '../layouts/Toolbar2'
+import Toolbar2 from "../layouts/Toolbar2";
+import User from "./User";
 
 export default {
   components: {
-      Toolbar2,
-    },
+    Toolbar2,
+    User
+  },
   data: () => {
     return {
       showModal: false
@@ -30,8 +32,12 @@ export default {
   box-sizing: border-box;
 }
 
-body {
-  font-family: "montserrat", sans-serif;
+h2{
+  padding-top: 1cm;
+}
+
+.ccolor{
+  color: green;
 }
 
 #dashboard {
