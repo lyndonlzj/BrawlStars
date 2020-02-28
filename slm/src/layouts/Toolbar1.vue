@@ -1,8 +1,8 @@
 <template id = "a">
   <div>
-    <v-app-bar color="#fff">
+    <v-app-bar color="#fff" height = "100cm">
       <div id="logohere">
-          <router-link class="rlink" to="/"><v-img height="2cm" width = "5cm" src="https://drive.google.com/uc?export=download&id=1tYg9ftGsyE4TiWONKoMHEDVzr6O4mzgY"></v-img></router-link>
+          <router-link class="rlink" to="/"><v-img height="1.9cm" width = "5cm" src="https://drive.google.com/uc?export=download&id=16kftyMwd1t1uZprOW7PsGahvTtE-owOr"></v-img></router-link>
       </div>
       <v-spacer></v-spacer>
       <v-btn class="b1" to="/about" text>About</v-btn>

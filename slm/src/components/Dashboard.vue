@@ -3,7 +3,7 @@
     <Toolbar2></Toolbar2>
       <h2>Dashboard</h2>
       <div id="dashboard">
-
+        
       </div>
   </div>
 </template>

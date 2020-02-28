@@ -4,7 +4,7 @@
         <div id="desc">
             Dare to ask.
             <br>
-            <v-btn rounded color="#527c70" to="/signup">Sign up now</v-btn>
+            <v-btn id="b" rounded color="#527c70" to="/signup" x-large>Sign up now</v-btn>
         </div>
     </div>
 </template>
@@ -20,6 +20,10 @@ export default {
 </script>
 
 <style scoped>
+#b{
+    text-transform: uppercase;
+    color: white;
+}
 
 #desc{
     padding: 7cm;
