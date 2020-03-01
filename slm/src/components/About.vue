@@ -1,13 +1,19 @@
 <template>
   <div>
     <Toolbar1></Toolbar1>
-    <v-container >Lorem ipsum dolor sit amet, 
-      consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-       ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-       reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-       Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
-       mollit anim id est laborum.</v-container>
+    <h1>Support Lecture Machine</h1><br>
+    <h4> Dare to ask.</h4><br>
+    <v-container> SLM serves as a platform for lecturers and students to communicate.
+      <br><br>
+      
+      <i> Lecturers </i> are able to create a new SLM session for the lecture of the day. SLM streamlines Q&A sessions during lectures,
+      allowing students to clarify their doubts in real- time. Barely have enough time to catch a breath during lectures, 
+      let alone answering questions? No worries, you can save the questions raised during the session and answer them at your own pace.
+      <br><br>
+
+      <i> Students</i> can ask questions and clarify their doubts by submitting their question during the SLM session created by lecturers. 
+      
+      </v-container>
   </div>
 </template>
 
@@ -21,7 +27,14 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  text-align: center;
+}
 h2{
+  text-align: center;
+}
+
+h4{
   text-align: center;
 }
 </style>
