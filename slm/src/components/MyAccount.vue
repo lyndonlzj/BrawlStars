@@ -1,31 +1,69 @@
 <template>
 <div>
 <Toolbar2></Toolbar2>
-<h3>Account Information</h3>
-    <div id = "account">
-      
-      Username: abcdef <br>
-      Email: abc@xyz.com 
-      
-      <v-btn id="b" rounded color="#527c70" small @click="showModal = true"> Change Password</v-btn>
-       
-       <transition name="fade" appear></transition>
-      <div class="modal-overlay" v-if="showModal" @click="showModal = false"></div>
+  <v-container class="fill-height" fluid>
+  <v-card
+    class="mx-auto"
+    max-width="500"
+    outlined
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="overline mb-4">Account Information</div>
+        <v-row>
+          <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="first"
+            label="First Name"
+          ></v-text-field>
+        </v-col>
 
-  <transition name="slide" appear>
-      <div class="modal" v-if="showModal">
-    <h4>Change Password</h4>
-    Old Password: <input type="text"/>
-    New Password: <input type="text"/>
-   <v-btn id="b" rounded color="#527c70" small @click="showModal = false">
-    Save
-   </v-btn>
-   </div>
-   </transition>
-     
-   </div>
+          <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="last"
+            label="Last Name"
+          ></v-text-field>
+        </v-col>
+
+          <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="user"
+            label="Username"
+          ></v-text-field>
+        </v-col>
+        
+
+          <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="password"
+            label="Password"
+          ></v-text-field>
+        </v-col>
+
+          <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="email"
+            label="Email address"
+          ></v-text-field>
+        </v-col>
+
+        </v-row>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="50"
+        color="grey"
+      ></v-list-item-avatar>
+    </v-list-item>
+
+    <v-card-actions>
+      <v-btn id="b" rounded color="#527c70" small>Save changes</v-btn>
+    </v-card-actions>
+  </v-card>
+  </v-container>
   </div>
-
 </template>
 
 <script>
@@ -34,73 +72,25 @@ import Toolbar2 from "../layouts/Toolbar2";
     components: {
       Toolbar2
     },
-    data: () => {
-      return {
-        showModal: false
-      }
-    }
-
+    data: () => ({
+      first: 'John',
+      last: 'Doe',
+      user: 'johnnydoe',
+      password: '********',
+      email: 'john_doe@gmail.com'
+    }),
+  
 };
 </script>
 
 <style lang="scss" scoped>
 
-#account {
-  
-  position: center;
-  padding-top: 2cm;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  //width: 100vw;
-  overflow-x: hidden;
-
- 
-}
-
-.modal-overlay {
- position: absolute;
- top: 0;
- left: 0;
- right: 0;
- bottom: 0;
- z-index: 98;
- background-color: rgba(0, 0, 0, 0.3);
-}
-
-.modal {
- position: fixed;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- z-index: 99;
- 
- width: 200%;
- max-width: 400px;
- background-color: #FFF;
- border-radius: 20px;
-
-}
-
-input {
-      background-color: #eee;
-      border: none;
-      padding: 8px 15px;
-      margin: 6px 0;
-      width: calc(100% - 30px);
-      border-radius: 15px;
-      border-bottom: 1px solid #ddd;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .4), 
-                        0 -1px 1px #fff, 
-                        0 1px 0 #fff;
-      overflow: hidden;
-      &:focus {
-        outline: none;
-        background-color: #fff;
-      }
-    }
+  #input-usage .v-input__prepend-outer,
+  #input-usage .v-input__append-outer,
+  #input-usage .v-input__slot,
+  #input-usage .v-messages {
+    border: 1px dashed rgba(0,0,0, .4);
+  }
 
 
 </style>
