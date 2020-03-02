@@ -1,11 +1,10 @@
 <template>
   <div>
-    <h2>Session Name : BT3103</h2>
-    <v-btn class="text-right" to="/dashboard" text>Back</v-btn>
-    <br><br>
-    <h2> Code : H3YGK </h2>
-    <h2> Current Mode : "I understand what has been taught so far!" </h2>
-
+    <Toolbar2></Toolbar2>
+    <div>
+      Session Name : BT3103 <br>
+      Code : H3YGK <br>
+    </div>
     <div id="dashboard">
       <h3 font-weight="bold">All Questions Asked</h3>
       <Questions></Questions>
@@ -15,10 +14,12 @@
 
 <script>
 import Questions from "./Questions"
+import Toolbar2 from "../layouts/Toolbar2"
 
 export default {
   components: {
-    Questions
+    Questions,
+    Toolbar2,
   },
   data: () => {
     return {
@@ -40,6 +41,9 @@ export default {
   align-items: center;
   width: 100vw;
   overflow-x: hidden;
+}
+
+#back{
 }
 
 </style>

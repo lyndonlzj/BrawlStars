@@ -5,7 +5,8 @@
         <div id="date">{{s.time}}</div>
         <h4>{{s.name}}</h4>
         <p>Posted by: {{s.user}}</p>
-        <v-btn id="b" rounded color="#527c70" small>See more</v-btn>
+        <p>Status: {{s.status}}</p>
+        <v-btn id="b" rounded color="#527c70" small>Marked as answered</v-btn>
       </li>
     </ul>
   </div>
@@ -16,11 +17,11 @@ export default {
   data: () => {
     return {
       mySessions: [
-        { name: "What do you mean by XXX", user:"Kevin Lim", moodmeter: ":)", time: "13:46:22" },
-        { name: "I do not understand what you said in slide 25", user:"Teo Ming Jing", moodmeter: ":)", time: "13:44:54" },
-        { name: "Can you go through part 2.2 again?",user:"Lim Jing Kang", moodmeter: ":(", time: "13:32:33" },
-        { name: "I cannot hear you from the back", user:"Michael Loh", moodmeter: ">:(", time: "13:28:12" },
-        { name: "Hi Prof, will part 2.0 be examinable?", user: "Darren Lim", moodmeter: ":|", time: "13:20:08" },
+        { name: "What do you mean by XXX", user:"Kevin Lim", moodmeter: ":)", time: "13:46:22", status: "Not Answered" },
+        { name: "I do not understand what you said in slide 25", user:"Teo Ming Jing", moodmeter: ":)", time: "13:44:54", status: "Not Answered" },
+        { name: "Can you go through part 2.2 again?",user:"Lim Jing Kang", moodmeter: ":(", time: "13:32:33", status: "Answered" },
+        { name: "I cannot hear you from the back", user:"Michael Loh", moodmeter: ">:(", time: "13:28:12", status: "Answered" },
+        { name: "Hi Prof, will part 2.0 be examinable?", user: "Darren Lim", moodmeter: ":|", time: "13:20:08", status: " Not Answered" },
       ]};
   },
 };
