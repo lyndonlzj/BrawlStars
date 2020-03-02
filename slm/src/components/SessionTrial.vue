@@ -14,14 +14,10 @@
 </template>
 
 <script>
-import Toolbar2 from "../layouts/Toolbar2";
-import User from "./User";
 import Questions from "./Questions"
 
 export default {
   components: {
-    Toolbar2,
-    User,
     Questions
   },
   data: () => {
