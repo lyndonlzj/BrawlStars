@@ -11,6 +11,8 @@ import About from './components/About.vue'
 import MyAccount from './components/MyAccount.vue'
 import vuetify from './plugins/vuetify';
 import SessionTrial from './components/SessionTrial.vue'
+import JoinCode from './components/JoinCode.vue'
+import CreateSession from './components/CreateSession.vue'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(VueRouter);
@@ -25,6 +27,8 @@ const routes = [
   {path: '/about', component: About},
   {path: '/myaccount', component: MyAccount},
   {path: '/sessiontrial', component: SessionTrial},
+  {path: '/joincode', component: JoinCode},
+  {path: '/createsession', component: CreateSession},
   {path: '*', component: NotFound},
 ];
 

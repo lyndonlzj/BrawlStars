@@ -7,12 +7,9 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
-      <v-btn class="b1" to="/createsession" text>Create Session</v-btn>
-      <v-btn class="b1" to="/joincode" text>Join Session</v-btn>
-      <v-btn class="b1" to="/myaccount" text>My Account</v-btn>
-      <v-btn class="b1" to="/" text>Logout</v-btn>
-
-      <v-menu left bottom></v-menu>
+      <v-spacer></v-spacer>
+      <v-btn class="b1" to="/dashboard" text>Back</v-btn>
+    <v-menu left bottom></v-menu>
     </v-app-bar>
   </div>
 </template>
