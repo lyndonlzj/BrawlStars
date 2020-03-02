@@ -10,6 +10,7 @@ import SessionPage from './components/SessionPage.vue'
 import About from './components/About.vue'
 import MyAccount from './components/MyAccount.vue'
 import vuetify from './plugins/vuetify';
+import SessionTrial from './components/SessionTrial.vue'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(VueRouter);
@@ -23,6 +24,7 @@ const routes = [
   {path: '/sessionpage', component: SessionPage},
   {path: '/about', component: About},
   {path: '/myaccount', component: MyAccount},
+  {path: '/sessiontrial', component: SessionTrial},
   {path: '*', component: NotFound},
 ];
 

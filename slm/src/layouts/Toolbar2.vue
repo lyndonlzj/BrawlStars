@@ -7,8 +7,8 @@
         </router-link>
       </div>
       <v-spacer></v-spacer>
-      <v-btn class="b1" to="/sessionpage" text>Create Session</v-btn>
-      <v-btn class="b1" to="/sessionpage" text>Join Session</v-btn>
+      <v-btn class="b1" to="/sessiontrial" text>Create Session</v-btn>
+      <JoinCodePopup/>
       |
       <v-btn class="b1" to="/myaccount" text>My Account</v-btn>
       <v-btn class="b1" to="/" text>Logout</v-btn>
@@ -19,9 +19,16 @@
 </template>
 
 <script>
+
+import JoinCodePopup from '../components/JoinCodePopup.vue';
 export default {
-  data: () => ({})
+  data: () => ({}),
+  components: {
+    JoinCodePopup
+  }
 };
+
+
 </script>
 
 <style scoped>
