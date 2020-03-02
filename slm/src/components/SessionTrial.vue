@@ -6,7 +6,8 @@
       Code : H3YGK <br>
     </div>
     <div id="dashboard">
-      <h3 font-weight="bold">All Questions Asked</h3>
+      <v-btn to ="/askquestion" rounded>I have a question!</v-btn>
+      <h3 font-weight="bold" to="/askq">All Questions Asked</h3>
       <Questions></Questions>
     </div>
   </div>

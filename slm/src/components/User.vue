@@ -9,7 +9,7 @@
         <p>sample question2 sag argrgrgq gr gerg?</p>
         <hr>
         <p>sample question3 sag argrgrgq gr gerg?</p>
-        <v-btn id="b" rounded color="#527c70" to="/signup" small>See more questions</v-btn>
+        <v-btn id="b" rounded color="#527c70" to="/sessiontrial" small>See more questions</v-btn>
       </li>
     </ul>
   </div>
@@ -20,11 +20,11 @@ export default {
   data: () => {
     return {
       mySessions: [
-        { name: "bt3103", moodmeter: ":)", date: "15/4/20" },
-        { name: "cs2030", moodmeter: ":)", date: "14/4/20" },
-        { name: "mkt1750x", moodmeter: ":(", date: "14/4/20" },
-        { name: "bt3102", moodmeter: ">:(", date: "13/4/20" },
-        { name: "cs2030", moodmeter: ":|", date: "12/4/20" },
+        { name: "BT3103", moodmeter: ":)", date: "15/4/20" },
+        { name: "CS2030", moodmeter: ":)", date: "14/4/20" },
+        { name: "MKT1750x", moodmeter: ":(", date: "14/4/20" },
+        { name: "BT3102", moodmeter: ">:(", date: "13/4/20" },
+        { name: "CS2030", moodmeter: ":|", date: "12/4/20" },
       ]};
   },
 };

@@ -37,7 +37,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="#d97f76">Sign up</v-btn>
+                <v-btn color="#d97f76" to="/dashboard">Sign up</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

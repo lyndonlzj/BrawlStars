@@ -13,6 +13,7 @@ import vuetify from './plugins/vuetify';
 import SessionTrial from './components/SessionTrial.vue'
 import JoinCode from './components/JoinCode.vue'
 import CreateSession from './components/CreateSession.vue'
+import AskQuestion from './components/AskQuestion.vue'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(VueRouter);
@@ -29,6 +30,7 @@ const routes = [
   {path: '/sessiontrial', component: SessionTrial},
   {path: '/joincode', component: JoinCode},
   {path: '/createsession', component: CreateSession},
+  {path: '/askquestion', component: AskQuestion},
   {path: '*', component: NotFound},
 ];
 
