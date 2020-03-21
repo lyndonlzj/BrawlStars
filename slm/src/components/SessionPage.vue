@@ -2,7 +2,7 @@
   <div>
     <h2>Session</h2>
     <Session></Session>
-    <router-link to="/dashboard">Return to dashboard</router-link>
+    <router-link to="/dashboard">Return To Dashboard</router-link>
   </div>
 </template>
 
