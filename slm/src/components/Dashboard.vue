@@ -5,30 +5,44 @@
 
     <div id="dashboard">
       <h3 font-weight="bold">Your past lectures</h3>
-      <User></User>
+      <ul>
+        <li v-for="lecture in lectures" v-bind:key="lecture.mod">
+          {{lecture.mod}} {{lecture.date}}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
 import Toolbar2 from "../layouts/Toolbar2";
-import User from "./User";
+import database from "../firebase.js";
 
 export default {
   components: {
-    Toolbar2,
-    User
+    Toolbar2
   },
   data: () => {
     return {
-      showModal: false
+      showModal: false,
+      lectures: []
     };
+  },
+  created() {
+    database.collection('lectures').get().then(querySnapShot => {
+      querySnapShot.forEach(doc => {
+        const data = {
+          'mod': doc.data().module,
+          'date': doc.data().date,
+        };
+        this.lectures.push(data);
+      });
+    });
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 #dashboard {
   position: center;
   padding-top: 2cm;
@@ -40,5 +54,4 @@ export default {
   width: 100vw;
   overflow-x: hidden;
 }
-
 </style>

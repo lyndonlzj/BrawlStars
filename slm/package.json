@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "firebase": "^7.12.0",
     "material-design-icons-iconfont": "^5.0.1",
     "save": "^2.4.0",
     "vue": "^2.6.11",
