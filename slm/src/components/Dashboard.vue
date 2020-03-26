@@ -6,7 +6,7 @@
       <h3 font-weight="bold">Your past lectures</h3>
       <ul>
         <li v-for="lecture in lectures" v-bind:key="lecture.mod">
-          {{lecture.mod}} {{lecture.date}}
+          {{lecture.lecture_id}} {{lecture.date}}
         </li>
       </ul>
     </div>
@@ -16,6 +16,7 @@
 <script>
 import Toolbar2 from "../layouts/Toolbar2";
 import database from "../firebase.js";
+//import moment from 'moment';
 
 export default {
   components: {
@@ -31,8 +32,8 @@ export default {
     database.collection('lectures').get().then(querySnapShot => {
       querySnapShot.forEach(doc => {
         const data = {
-          'mod': doc.data().module,
-          'date': doc.data().date,
+          'lecture_id': doc.data().lecture_id,
+          'date': new Date(doc.data().date.seconds * 1000)
         };
         this.lectures.push(data);
       });

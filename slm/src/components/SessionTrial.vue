@@ -2,7 +2,7 @@
   <div>
     <Toolbar2></Toolbar2>
     <div>
-      Session Name : BT3103 <br>
+      Session Name : BT3103 Week 4 <br>
       Code : H3YGK <br>
     </div>
     <div id="dashboard">
@@ -16,6 +16,7 @@
 <script>
 import Questions from "./Questions"
 import Toolbar2 from "../layouts/Toolbar2"
+//import database from "../firebase.js";
 
 export default {
   components: {
@@ -25,8 +26,22 @@ export default {
   data: () => {
     return {
       showModal: false
-    };
-  }
+    }
+  },
+  // },
+  // created() {
+  //   database.collection('lectures').get().then(querySnapShot => {
+  //     querySnapShot.forEach(doc => {
+  //       const data = {
+  //         'mod': doc.data().module,
+  //         'date': doc.data().date,
+  //         lecture_id: doc.data().lecture_id,
+  //         messages: doc.data().messages
+  //       };
+  //       this.lectures.push(data);
+  //     });
+  //   });
+  // }
 };
 </script>
 
