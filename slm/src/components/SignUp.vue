@@ -13,31 +13,23 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    label="Name"
-                    name="name"
+                    label="Email"
                     type="text"
                     prepend-icon="mdi-account-circle"
+                    v-model="email"
                   />
 
                   <v-text-field
-                    label="Login"
-                    name="login"
-                    type="text"
-                    prepend-icon="mdi-account-circle"
-                  />
-
-                  <v-text-field
-                    id="password"
                     label="Password"
-                    name="password"
                     type="password"
                     prepend-icon="mdi-lock"
+                    v-model="password"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="#d97f76" to="/dashboard">Sign up</v-btn>
+                <v-btn v-on:click="register" color="#d97f76">Sign up</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -49,6 +41,7 @@
 
 <script>
 import Toolbar1 from "../layouts/Toolbar1";
+import firebase from 'firebase';
 
 export default {
   components: {
@@ -56,10 +49,24 @@ export default {
   },
   data() {
     return {
-      name: null,
-      email: null,
-      password: null
+      email: '',
+      password: ''
     };
+  },
+  methods : {
+    register: function(event) {
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      .then(
+        user => {
+          alert(`Account created for ${user.user.email}`);
+          this.$router.push('/dashboard');
+        },
+        err => {
+          alert(err.message);
+        }
+      );
+      event.preventDefault();
+    }
   }
 };
 </script>

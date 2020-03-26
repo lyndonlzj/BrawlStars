@@ -2,7 +2,6 @@
   <div>
     <Toolbar2></Toolbar2>
     <h2>Dashboard</h2>
-
     <div id="dashboard">
       <h3 font-weight="bold">Your past lectures</h3>
       <ul>

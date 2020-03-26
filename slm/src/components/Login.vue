@@ -7,30 +7,29 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar color="#527c70" dark flat>
-                <v-toolbar-title class="change-font" >Login here</v-toolbar-title>
+                <v-toolbar-title class="change-font">Login here</v-toolbar-title>
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    label="Login"
-                    name="login"
+                    label="Login Email"
                     type="text"
                     prepend-icon="mdi-account-circle"
+                    v-model="email"
                   />
 
                   <v-text-field
-                    id="password"
                     label="Password"
-                    name="password"
                     type="password"
                     prepend-icon="mdi-lock"
+                    v-model="password"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="#d97f76" to="/dashboard">Login</v-btn>
+                <v-btn v-on:click="login" color="#d97f76">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -41,29 +40,46 @@
 </template>
 
 <script>
-import Toolbar1 from '../layouts/Toolbar1'
+import Toolbar1 from "../layouts/Toolbar1";
+import firebase from 'firebase';
 
-  export default {
-    components: {
-      Toolbar1,
-    },
-    data() {
-      return {
-        name:null,
-        email:null,
-        password:null,
-      }
+export default {
+  components: {
+    Toolbar1
+  },
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    login: function(event) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            alert(`You are logged in as ${user.user.email}`);
+            this.$router.push("/dashboard");
+          },
+          err => {
+            alert(err.message);
+          }
+        );
+      event.preventDefault();
     }
   }
+};
 </script>
 
 <style scoped>
-#a{
+#a {
   background-color: #f0eddf;
 }
 
 .change-font {
-    font-family: "Roboto", Helvetica, sans-serif;
-    font-weight: bold;
+  font-family: "Roboto", Helvetica, sans-serif;
+  font-weight: bold;
 }
 </style>

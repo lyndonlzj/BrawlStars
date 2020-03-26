@@ -1,43 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router';
-import Home from './components/Home.vue'
-import NotFound from './components/NotFound.vue'
-import Dashboard from './components/Dashboard.vue'
-import Login from './components/Login.vue'
-import SignUp from './components/SignUp.vue'
-import SessionPage from './components/SessionPage.vue'
-import About from './components/About.vue'
-import MyAccount from './components/MyAccount.vue'
-import vuetify from './plugins/vuetify';
-import SessionTrial from './components/SessionTrial.vue'
-import JoinCode from './components/JoinCode.vue'
-import CreateSession from './components/CreateSession.vue'
-import AskQuestion from './components/AskQuestion.vue'
+import router from './router'
+import vuetify from './plugins/vuetify'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
-Vue.use(VueRouter);
 Vue.config.productionTip = false
-
-const routes = [
-  {path: '/', component: Home},
-  {path: '/dashboard', component: Dashboard},
-  {path: '/login', component: Login},
-  {path: '/signup', component: SignUp},
-  {path: '/sessionpage', component: SessionPage},
-  {path: '/about', component: About},
-  {path: '/myaccount', component: MyAccount},
-  {path: '/sessiontrial', component: SessionTrial},
-  {path: '/joincode', component: JoinCode},
-  {path: '/createsession', component: CreateSession},
-  {path: '/askquestion', component: AskQuestion},
-  {path: '*', component: NotFound},
-];
-
-const router = new VueRouter({
-  routes,
-  mode: 'history',
-});
 
 new Vue({
   router,
