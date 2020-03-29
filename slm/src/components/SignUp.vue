@@ -55,16 +55,25 @@ export default {
   },
   methods : {
     register: function(event) {
+      //create user in firebase
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
       .then(
         user => {
           alert(`Account created for ${user.user.email}`);
+      
+          const account = {
+            uid: user.user.uid,
+            email: user.user.email,
+          }
+
+          firebase.firestore().collection('users').doc(user.user.uid).set(account);
           this.$router.push('/dashboard');
+        
         },
         err => {
           alert(err.message);
         }
-      );
+      )
       event.preventDefault();
     }
   }
