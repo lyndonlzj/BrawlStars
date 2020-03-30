@@ -7,7 +7,12 @@
       <div class="content">
         <form id="questionForm">
           <input id="questionBox" type="text" name="question" placeholder="Ask here" />
-          <v-btn id="askQuestion" @click.prevent="postQuestion()" rounded color="#d97f76">Ask Question</v-btn>
+          <v-btn
+            id="askQuestion"
+            @click.prevent="postQuestion()"
+            rounded
+            color="#d97f76"
+          >Ask Question</v-btn>
         </form>
         <v-btn id="orderButton" onclick="orderVote()">Order by Upvotes</v-btn>
 
@@ -38,7 +43,7 @@
 <script>
 import Toolbar2 from "../layouts/Toolbar2";
 import database from "../firebase.js";
-import firebase from 'firebase';
+import firebase from "firebase";
 
 export default {
   components: {
@@ -48,14 +53,14 @@ export default {
     return {
       itemsList: [],
       id: "",
-      numQuestion: 0,
+      numQuestion: 0
     };
   },
   methods: {
     postQuestion: function() {
       var qn = document.getElementById("questionBox").value;
       this.numQuestion++;
-      console.log(this.numQuestion)
+      console.log(this.numQuestion);
       database.collection("questions").add({
         question: qn,
         votes: 0,
@@ -72,9 +77,11 @@ export default {
         .get()
         .then(querySnapShot => {
           let question = {};
+          console.log(this.id);
           querySnapShot.forEach(doc => {
             question = doc.data();
             if (question.session_id == this.id) {
+              console.log(question.session_id);
               question.show = true;
               this.itemsList.push(question);
               this.numQuestion++;
@@ -114,18 +121,18 @@ export default {
   },
   created() {
     this.id = this.$route.params.id;
-    database.collection('questions').onSnapshot( res=> {
+    database.collection("questions").onSnapshot(res => {
       const changes = res.docChanges();
       changes.forEach(change => {
-        if (change.type == 'added') {
-          this.itemsList.push({
-            ...change.doc.data(),
-          })
+        if (change.type == "added") {
+          if (change.doc.data().session_id == this.id) {
+            this.itemsList.push({
+              ...change.doc.data()
+            });
+          }
         }
-      })
-    }
-
-    )
+      });
+    });
   }
 };
 </script>
