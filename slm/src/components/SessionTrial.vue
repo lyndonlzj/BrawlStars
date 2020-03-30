@@ -27,7 +27,7 @@
             </v-btn>
             {{item.votes}}
             <v-spacer></v-spacer>
-            <v-btn text color="deep-purple accent-4">Reply</v-btn>
+            <v-btn text color="deep-purple accent-4">Answer</v-btn>
           </v-card>
         </v-list>
       </div>
