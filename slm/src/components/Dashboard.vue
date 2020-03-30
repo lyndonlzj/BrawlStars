@@ -29,8 +29,8 @@ export default {
     };
   },
   created() {
-    database.collection('lectures').get().then(querySnapShot => {
-      querySnapShot.forEach(doc => {
+    database.collection('lectures').onSnapshot(snapshot => {
+      snapshot.forEach(doc => {
         const data = {
           'lecture_id': doc.data().lecture_id,
           'date': new Date(doc.data().date.seconds * 1000)

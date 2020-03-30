@@ -1,65 +1,92 @@
 <template>
-  <div>
-    <Toolbar2></Toolbar2>
+  <v-app id="page">
     <div>
-      Session Name : BT3103 Week 4 <br>
-      Code : H3YGK <br>
+      <Toolbar2></Toolbar2>
+      <H1> {{id}} </H1>
+
+      <div class="content">
+        <form id="question-form">
+          <input type="text" name="question" placeholder="Ask here" />
+          <v-btn rounded color="#d97f76">Ask Question</v-btn>
+        </form>
+        <v-btn id="orderButton" onclick="orderVote()">Order by Upvotes</v-btn>
+
+        <ul id="question-list"></ul>
+        <li v-for="item in itemsList" v-bind:key="item.question_id">
+          {{item.question}} {{item.votes}} {{item.question_id}}
+
+        </li>
+      </div>
     </div>
-    <div id="dashboard">
-      <v-btn to ="/askquestion" rounded>I have a question!</v-btn>
-      <h3 font-weight="bold" to="/askq">All Questions Asked</h3>
-      <Questions></Questions>
-    </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
-import Questions from "./Questions"
-import Toolbar2 from "../layouts/Toolbar2"
-//import database from "../firebase.js";
+import Toolbar2 from "../layouts/Toolbar2";
+import database from "../firebase.js";
 
 export default {
+
   components: {
-    Questions,
-    Toolbar2,
+    Toolbar2
   },
   data: () => {
     return {
-      showModal: false
+      itemsList: [],
+      id:"",
+    };
+  },
+  methods: {
+    fetchItems: function() {
+      database
+        .collection('questions')
+        .get()
+        .then(querySnapShot => {
+          let question = {};
+          querySnapShot.forEach(doc => {
+            question = doc.data();
+            if (question.session_id == this.id) {
+              question.show = true;
+              this.itemsList.push(question);
+            }
+          });
+        });
     }
   },
-  // },
-  // created() {
-  //   database.collection('lectures').get().then(querySnapShot => {
-  //     querySnapShot.forEach(doc => {
-  //       const data = {
-  //         'mod': doc.data().module,
-  //         'date': doc.data().date,
-  //         lecture_id: doc.data().lecture_id,
-  //         messages: doc.data().messages
-  //       };
-  //       this.lectures.push(data);
-  //     });
-  //   });
-  // }
+  created() {
+    this.fetchItems();
+    this.id = this.$route.params.id;
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
-#dashboard {
-  position: center;
-  padding-top: 2cm;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  overflow-x: hidden;
+form input {
+  float: left;
+  width: 38%;
+  margin: 0;
+  border: 0;
+  margin: 0 1%;
+  padding: 10px;
+  display: block;
+  box-sizing: border-box;
+  font-size: 18px;
+  background-color: #ffffff;
 }
 
-#back{
+form input:focus {
+  outline: none;
+  padding-bottom: 8px;
+  transition: all ease 0.2s;
 }
 
+form:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+#page{
+  background-color:#f0eddf;
+}
 </style>

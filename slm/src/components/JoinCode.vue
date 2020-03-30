@@ -7,7 +7,7 @@
           <v-col cols="12" sm="8" md="4">
             <v-card class="elevation-12">
               <v-toolbar color="#527c70" dark flat>
-                <v-toolbar-title class="change-font" >Enter Session Code to Join</v-toolbar-title>
+                <v-toolbar-title class="change-font">Enter Session Code to Join</v-toolbar-title>
                 <v-spacer />
               </v-toolbar>
               <v-card-text>
@@ -16,19 +16,24 @@
                     id="Code"
                     label="Code"
                     name="code"
-                    type="password"
+                    type="text"
                     prepend-icon="mdi-lock"
+                    v-model="code"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="#d97f76" to="/sessiontrial">Join Session</v-btn>
+                <router-link id="rl" :to="{name: 'sessionpage', params: {id: this.code}} ">
+                  Join Here
+                </router-link>
+
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
+
     </v-content>
   </v-app>
 </template>
@@ -42,10 +47,10 @@ import ToolbarEmptyLogo from '../layouts/ToolbarEmptyLogo'
     },
     data() {
       return {
-        name:null,
-        email:null,
-        password:null,
+        code: "",
       }
+    },
+    methods:{
     }
   }
 </script>
@@ -59,4 +64,12 @@ import ToolbarEmptyLogo from '../layouts/ToolbarEmptyLogo'
     font-family: "Roboto", Helvetica, sans-serif;
     font-weight: bold;
 }
+
+#rl{
+   background-color: #d97f76;
+   cursor: pointer;
+   color: black;
+   font-family: Roboto;
+
+ }
 </style>
