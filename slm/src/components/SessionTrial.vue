@@ -5,9 +5,9 @@
       <H1>{{id}}</H1>
 
       <div class="content">
-        <form id="question-form">
+        <form id="questionForm">
           <input id="questionBox" type="text" name="question" placeholder="Ask here" />
-          <v-btn rounded color="#d97f76">Ask Question</v-btn>
+          <v-btn id="askQuestion" @click.prevent="postQuestion()" rounded color="#d97f76">Ask Question</v-btn>
         </form>
         <v-btn id="orderButton" onclick="orderVote()">Order by Upvotes</v-btn>
 
@@ -22,7 +22,7 @@
             </v-list-item>
             <v-card-text>{{item.answer}}</v-card-text>
 
-            <v-btn icon @click.prevent="upvoteQ">
+            <v-btn icon @click.prevent="upvoteQ(item)">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
             {{item.votes}}
@@ -38,6 +38,7 @@
 <script>
 import Toolbar2 from "../layouts/Toolbar2";
 import database from "../firebase.js";
+import firebase from 'firebase';
 
 export default {
   components: {
@@ -46,10 +47,25 @@ export default {
   data: () => {
     return {
       itemsList: [],
-      id: ""
+      id: "",
+      numQuestion: 0,
     };
   },
   methods: {
+    postQuestion: function() {
+      var qn = document.getElementById("questionBox").value;
+      this.numQuestion++;
+      console.log(this.numQuestion)
+      database.collection("questions").add({
+        question: qn,
+        votes: 0,
+        question_id: this.numQuestion,
+        session_id: this.id,
+        answer: " ",
+        user_id: firebase.auth().currentUser.email
+      });
+    },
+
     fetchItems: function() {
       database
         .collection("questions")
@@ -61,23 +77,55 @@ export default {
             if (question.session_id == this.id) {
               question.show = true;
               this.itemsList.push(question);
+              this.numQuestion++;
             }
           });
         });
     },
+
     upvoteQ: function(i) {
-        database.collection('questions').where('question_id', '==', i.question_id).get().then(
-          snapshot => {
-            snapshot.docs.forEach(doc => {
-              doc.votes += 1;
-            }) 
-          }
-        )
+      var qid = i.question_id;
+      var sid = i.session_id;
+      var ques = i.question;
+      var ans = i.ans;
+      var votes = i.votes;
+      var uid = i.user_id;
+
+      console.log(qid);
+      console.log("step1");
+      database
+        .collection("questions")
+        .where("question_id", "==", qid)
+        .get()
+        .then(snapshot => {
+          snapshot.docs.forEach(doc => {
+            doc.set({
+              question_id: qid,
+              session_id: sid,
+              question: ques,
+              answer: ans,
+              user_id: uid,
+              votes: votes + 1
+            });
+          });
+        });
+      console.log("step2");
     }
   },
   created() {
-    this.fetchItems();
     this.id = this.$route.params.id;
+    database.collection('questions').onSnapshot( res=> {
+      const changes = res.docChanges();
+      changes.forEach(change => {
+        if (change.type == 'added') {
+          this.itemsList.push({
+            ...change.doc.data(),
+          })
+        }
+      })
+    }
+
+    )
   }
 };
 </script>
