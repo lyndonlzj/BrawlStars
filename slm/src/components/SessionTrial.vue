@@ -18,7 +18,7 @@
 
         <ul id="question-list"></ul>
         <v-list v-for="item in itemsList" v-bind:key="item.question_id">
-          <v-card class="mx-auto">
+          <v-card class="mx-auto" color="#f0eddf">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title class="headline">{{item.question}}</v-list-item-title>
@@ -30,9 +30,15 @@
             <v-btn icon @click.prevent="upvoteQ(item)">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
+
             {{item.votes}}
             <v-spacer></v-spacer>
-            <v-btn text color="deep-purple accent-4">Answer</v-btn>
+            
+          <v-btn text color="deep-purple accent-4" @click.prevent="answerQuestion(item, 
+          )">
+            Answer
+          </v-btn>
+
           </v-card>
         </v-list>
       </div>
@@ -52,23 +58,42 @@ export default {
   data: () => {
     return {
       itemsList: [],
-      id: "",
-      numQuestion: 0
+      id: ""
     };
   },
   methods: {
+
     postQuestion: function() {
       var qn = document.getElementById("questionBox").value;
-      this.numQuestion++;
-      console.log(this.numQuestion);
-      database.collection("questions").add({
+      const ref = database.collection("questions").doc();
+      ref.set({
+        question_id: ref.id,
         question: qn,
         votes: 0,
-        question_id: this.numQuestion,
         session_id: this.id,
         answer: " ",
         user_id: firebase.auth().currentUser.email
       });
+    },
+    
+    answerQuestion: function(i) {
+      var ans = document.getElementById("answerBox").value;
+      var qid = i.question_id;
+      i.answer = ans;
+      database
+        .collection("questions")
+        .doc(qid)
+        .update({ answer: i.answer });
+
+    },
+    
+    upvoteQ: function(i) {
+      var qid = i.question_id;
+      i.votes = i.votes + 1;
+      database
+        .collection("questions")
+        .doc(qid)
+        .update({ votes: i.votes });
     },
 
     fetchItems: function() {
@@ -77,48 +102,24 @@ export default {
         .get()
         .then(querySnapShot => {
           let question = {};
-          console.log(this.id);
           querySnapShot.forEach(doc => {
             question = doc.data();
             if (question.session_id == this.id) {
               console.log(question.session_id);
               question.show = true;
               this.itemsList.push(question);
-              this.numQuestion++;
             }
           });
         });
     },
 
-    upvoteQ: function(i) {
-      var qid = i.question_id;
-      var sid = i.session_id;
-      var ques = i.question;
-      var ans = i.ans;
-      var votes = i.votes;
-      var uid = i.user_id;
+    orderVotes: function() {
+      document.getElementById("question-list");
+      
+    },
 
-      console.log(qid);
-      console.log("step1");
-      database
-        .collection("questions")
-        .where("question_id", "==", qid)
-        .get()
-        .then(snapshot => {
-          snapshot.docs.forEach(doc => {
-            doc.set({
-              question_id: qid,
-              session_id: sid,
-              question: ques,
-              answer: ans,
-              user_id: uid,
-              votes: votes + 1
-            });
-          });
-        });
-      console.log("step2");
-    }
   },
+
   created() {
     this.id = this.$route.params.id;
     database.collection("questions").onSnapshot(res => {
@@ -126,6 +127,20 @@ export default {
       changes.forEach(change => {
         if (change.type == "added") {
           if (change.doc.data().session_id == this.id) {
+            this.itemsList.push({
+              ...change.doc.data()
+            });
+          }
+        }
+        if (change.type == "modified") {
+          var id = change.doc.data().question_id
+          if (change.doc.data().session_id == this.id) {
+            for (let i=0; i < this.itemsList.length; i++) {
+              if(this.itemsList[Object.keys(this.itemsList)[i]].question_id== id) {
+                this.itemsList[Object.keys(this.itemsList)[i]].question_id = change.doct.data()
+                break;
+              }
+            }
             this.itemsList.push({
               ...change.doc.data()
             });
