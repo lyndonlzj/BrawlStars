@@ -14,7 +14,7 @@
             color="#d97f76"
           >Ask Question</v-btn>
         </form>
-        <v-btn id="orderButton" onclick="orderVote()">Order by Upvotes</v-btn>
+        <v-btn id="orderButton" @click.prevent="orderVotes()">Order by Upvotes</v-btn>
 
         <ul id="question-list"></ul>
         <v-list v-for="item in itemsList" v-bind:key="item.question_id">
@@ -114,8 +114,18 @@ export default {
     },
 
     orderVotes: function() {
-      document.getElementById("question-list");
-      
+      this.itemsList = [];
+      database.collection('questions').orderBy('votes', "desc").get().then(snapshot => {
+        let question = {};
+        snapshot.docs.forEach(doc => {
+            question = doc.data();
+            if (question.session_id == this.id) {
+              console.log(question.session_id);
+              question.show = true;
+              this.itemsList.push(question);
+            }
+        });
+    });
     },
 
   },
