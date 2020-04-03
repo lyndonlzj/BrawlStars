@@ -13,6 +13,7 @@
             class="ma-3 pa-6"
             outlined
             tile
+            @click="handleClick(mod.mod_id)"
           >
           {{mod.mod_id}} 
           </v-card>
@@ -47,6 +48,7 @@ export default {
       modules: [],
     };
   },
+  
   // created() {
   //   database.collection('lectures').onSnapshot(snapshot => {
   //     snapshot.forEach(doc => {
@@ -61,7 +63,7 @@ export default {
  methods:{
    fetchItems: function(){   
       //get items from database
-      
+            console.log("test")
       var userID =  firebase.auth().currentUser.uid;
      //console.log(userID)
       database.collection('enrolments').get().then((querySnapShot) =>{
@@ -74,7 +76,12 @@ export default {
             }
         })
       })
-    }
+    },
+    handleClick(mod) {
+      console.log(mod)
+
+        this.$router.push({name: "module", params: { mod: mod}});
+    },
     },
     created() {
       this.fetchItems()

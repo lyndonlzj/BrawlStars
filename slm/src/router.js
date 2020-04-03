@@ -14,6 +14,7 @@ import SessionTrial from './components/SessionTrial.vue'
 import JoinCode from './components/JoinCode.vue'
 import CreateSession from './components/CreateSession.vue'
 import AskQuestion from './components/AskQuestion.vue'
+import ModuleSessList from './components/ModuleSessList.vue'
 
 Vue.use(Router);
 
@@ -30,6 +31,7 @@ let router = new Router({
         { path: '/joincode', component: JoinCode, meta: { requiresAuth: true } },
         { path: '/createsession', component: CreateSession, meta: { requiresAuth: true } },
         { path: '/askquestion', component: AskQuestion, meta: { requiresAuth: true } },
+        { path: '/modsess', name: 'module',props: true,component: ModuleSessList, meta: { requiresAuth: true } },
         { path: '*', component: NotFound },
     ],
     mode: 'history'
