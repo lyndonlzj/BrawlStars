@@ -29,9 +29,10 @@ export default {
             //loop 
             let item = {} 
             querySnapShot.forEach(doc=>{
+              if (doc.data().module_id == this.mod){
                 item = doc.data().sessions
                 for (let i=0; i < item.length; i++)          
-                    this.sessList.push(item[i])
+                    this.sessList.push(item[i])}
             });
     })
     },
