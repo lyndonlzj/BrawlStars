@@ -27,7 +27,7 @@ let router = new Router({
         { path: '/sessionpage', component: SessionPage, meta: { requiresAuth: true } },
         { path: '/about', component: About },
         { path: '/myaccount', component: MyAccount, meta: { requiresAuth: true } },
-        { path: '/sessiontrial/:id', component: SessionTrial, props:true, name:'sessionpage', meta: { requiresAuth: true }},
+        { path: '/sessiontrial/', component: SessionTrial, props:true, name:'sessionpage', meta: { requiresAuth: true }},
         { path: '/joincode', component: JoinCode, meta: { requiresAuth: true } },
         { path: '/createsession', component: CreateSession, meta: { requiresAuth: true } },
         { path: '/askquestion', component: AskQuestion, meta: { requiresAuth: true } },

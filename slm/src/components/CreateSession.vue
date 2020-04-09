@@ -12,19 +12,21 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
+                  
                   <v-text-field
                     id="Session Name"
-                    label="Session Name"
+                    label="Module Code (Eg. BT3103)"
                     name="Session Name"
-                    type="password"
+                    type= "text"
                     prepend-icon="mdi-account-circle"
                   />
                   
+                  
                   <v-text-field
                     id="Session Code"
-                    label="Session Code"
+                    label="Week No. (Eg. 1)"
                     name="Session Code"
-                    type="password"
+                    type="number"
                     prepend-icon="mdi-lock"
                   />
 
