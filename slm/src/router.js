@@ -21,14 +21,14 @@ Vue.use(Router);
 let router = new Router({
     routes: [
         { path: '/', component: Home },
-        { path: '/dashboard', component: Dashboard, meta: { requiresAuth: true } },
+        { path: '/dashboard', component: Dashboard, name: 'dashboard', meta: { requiresAuth: true } },
         { path: '/login', component: Login, meta: { requiresGuest: true } },
         { path: '/signup', component: SignUp, meta: { requiresGuest: true } },
         { path: '/sessionpage', component: SessionPage, meta: { requiresAuth: true } },
         { path: '/about', component: About },
         { path: '/myaccount', component: MyAccount, meta: { requiresAuth: true } },
         { path: '/sessiontrial/', component: SessionTrial, props:true, name:'sessionpage', meta: { requiresAuth: true }},
-        { path: '/joincode', component: JoinCode, meta: { requiresAuth: true } },
+        { path: '/joincode', component: JoinCode, name:'joincode', meta: { requiresAuth: true } },
         { path: '/createsession', component: CreateSession, meta: { requiresAuth: true } },
         { path: '/askquestion', component: AskQuestion, meta: { requiresAuth: true } },
         { path: '/modsess', name: 'module',props: true,component: ModuleSessList, meta: { requiresAuth: true } },

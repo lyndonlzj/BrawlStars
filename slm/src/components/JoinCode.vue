@@ -13,20 +13,20 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
-                    id="Code"
-                    label="Code"
+                    id="code"
+                    label="code"
                     name="code"
                     type="text"
                     prepend-icon="mdi-lock"
-                    v-model="code"
+                    v-model="joincode"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <router-link id="rl" :to="{name: 'sessionpage', params: {id: this.code}} ">
-                  Join Here
-                </router-link>
+                <v-btn id = "joinButton" @click.prevent="joinClick(joincode)">
+                  Join Session
+                </v-btn>
 
               </v-card-actions>
             </v-card>
@@ -40,17 +40,34 @@
 
 <script>
 import ToolbarEmptyLogo from '../layouts/ToolbarEmptyLogo'
-
+import database from "../firebase.js";
   export default {
     components: {
       ToolbarEmptyLogo,
     },
     data() {
       return {
-        code: "",
+        joincode: "",
       }
     },
     methods:{
+      joinClick(code) {
+        database.collection('modules').get().then((querySnapShot) =>{
+            //loop 
+            let item = {} 
+            querySnapShot.forEach(doc=>{
+                item = doc.data().sessions
+                for (let i=0; i < item.length; i++){
+                    if (item[i] == code) {
+                      this.$router.push({name: "sessionpage", params: {id: code}});
+                      break;
+                    }
+                }
+                
+            });
+    })
+    this.$router.push({name: "not found"})
+      }
     }
   }
 </script>
