@@ -32,7 +32,7 @@ let router = new Router({
         { path: '/createsession', component: CreateSession, meta: { requiresAuth: true } },
         { path: '/askquestion', component: AskQuestion, meta: { requiresAuth: true } },
         { path: '/modsess', name: 'module',props: true,component: ModuleSessList, meta: { requiresAuth: true } },
-        { path: '*', component: NotFound },
+        { path: '*', component: NotFound, name: 'not found' },
     ],
     mode: 'history'
 });

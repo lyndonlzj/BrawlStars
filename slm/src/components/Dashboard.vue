@@ -1,33 +1,25 @@
 <template>
   <div>
+    <v-app>
     <Toolbar2></Toolbar2>
-    <h2>Dashboard</h2>
     <div id="dashboard">
-      <h3 font-weight="bold">Your Enrolled Modules</h3>
-         <v-container fluid grid-list-md bg fill-height text-xs-center>
-              <v-layout row wrap>
-    <v-flex xs4 class="my-2">
-             
-         <v-card
-            v-for="mod in modules" :key="mod.mod_id"
-            class="ma-3 pa-6"
-            outlined
-            tile
-            @click="handleClick(mod.mod_id)"
-          >
-          {{mod.mod_id}} 
+      <h2>Dashboard</h2>
+      <h4 font-weight="bold">Your Enrolled Modules</h4>
+      <!-- going through the modules -->
+      <v-container class="my-5">
+      <v-layout row wrap>
+        <v-flex xs12 sm6 md4 lg3 v-for="mod in modules" :key="mod.mod_id" @click="handleClick(mod.mod_id)">
+          <v-hover
+        v-slot:default="{ hover }">
+          <v-card class="text-center ma-3" :elevation="hover ? 16 : 2">  
+            {{mod.mod_id}} 
           </v-card>
+          </v-hover>
           </v-flex>
          </v-layout>
          </v-container>       
-
-      <h3 font-weight="bold">Your past lectures</h3>
-      <ul>
-        <li v-for="lecture in lectures" v-bind:key="lecture.mod">
-          {{lecture.lecture_id}} {{lecture.date}}
-        </li>
-      </ul>
-    </div>
+    </div> 
+  </v-app>
   </div>
 </template>
 
@@ -44,26 +36,14 @@ export default {
   data: () => {
     return {
       showModal: false,
-      lectures: [],
       modules: [],
+      moduleInfo: [],
     };
   },
   
-  // created() {
-  //   database.collection('lectures').onSnapshot(snapshot => {
-  //     snapshot.forEach(doc => {
-  //       const data = {
-  //         'lecture_id': doc.data().lecture_id,
-  //         'date': new Date(doc.data().date.seconds * 1000)
-  //       };
-  //       this.lectures.push(data);
-  //     });
-  //   });
-  // },
  methods:{
    fetchItems: function(){   
-      //get items from database
-            console.log("test")
+      //get students'ENROLMENTS from database
       var userID =  firebase.auth().currentUser.uid;
      //console.log(userID)
       database.collection('enrolments').get().then((querySnapShot) =>{
@@ -78,8 +58,6 @@ export default {
       })
     },
     handleClick(mod) {
-      console.log(mod)
-
         this.$router.push({name: "module", params: { mod: mod}});
     },
     },
@@ -102,10 +80,5 @@ export default {
   width: 100vw;
   overflow-x: hidden;
 }
-.card {
-  max-width: 350px;
-    transform: scale(0.9);
-    font-size: 16px;
-    float: left
-}
+
 </style>
