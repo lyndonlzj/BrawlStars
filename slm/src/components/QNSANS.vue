@@ -12,7 +12,7 @@
       </div>
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
-      <v-btn class="b1" :to="{name: 'sessiontrial', params: {id: this.modID}} " text>Back</v-btn>
+      <v-btn class="b1" :to="{name: 'sessionpage', params: {id: this.modID}} " text>Back</v-btn>
     <v-menu left bottom></v-menu>
     </v-app-bar>
     </div>

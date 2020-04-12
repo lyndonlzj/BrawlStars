@@ -59,7 +59,7 @@ import database from "../firebase.js";
                 item = doc.data().sessions
                 for (let i=0; i < item.length; i++){
                     if (item[i] == code) {
-                      this.$router.push({name: "sessiontrial", params: {id: code}});
+                      this.$router.push({name: "sessionpage", params: {id: code}});
                       break;
                     }
                 }

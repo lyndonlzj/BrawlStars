@@ -6,8 +6,7 @@ import Home from './components/Home.vue'
 import NotFound from './components/NotFound.vue'
 import Dashboard from './components/Dashboard.vue'
 import Login from './components/Login.vue'
-import SignUp from './components/SignUp.vue'
-import SessionPage from './components/SessionPage.vue'
+import SignUp from './components/SignUp.vue'    
 import About from './components/About.vue'
 import MyAccount from './components/MyAccount.vue'
 import SessionTrial from './components/SessionTrial.vue'
@@ -25,10 +24,9 @@ let router = new Router({
         { path: '/dashboard', component: Dashboard, name: 'dashboard', meta: { requiresAuth: true } },
         { path: '/login', component: Login, meta: { requiresGuest: true } },
         { path: '/signup', component: SignUp, meta: { requiresGuest: true } },
-        { path: '/sessionpage', component: SessionPage, meta: { requiresAuth: true } },
         { path: '/about', component: About },
         { path: '/myaccount', component: MyAccount, meta: { requiresAuth: true } },
-        { path: '/sessiontrial/', component: SessionTrial, props:true, name:'sessiontrial', meta: { requiresAuth: true }},
+        { path: '/sessiontrial/', component: SessionTrial, props:true, name:'sessionpage', meta: { requiresAuth: true }},
         { path: '/joincode', component: JoinCode, name:'joincode', meta: { requiresAuth: true } },
         { path: '/createsession', component: CreateSession, meta: { requiresAuth: true } },
         { path: '/askquestion', component: AskQuestion, meta: { requiresAuth: true } },
