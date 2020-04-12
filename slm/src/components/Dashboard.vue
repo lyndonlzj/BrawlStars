@@ -6,13 +6,13 @@
       <h2>Dashboard</h2>
       <h4 font-weight="bold">Your Enrolled Modules</h4>
       <!-- going through the modules -->
-      <v-container class="my-5">
+      <v-container class="my-5" v-for="mod in modules" :key="mod">
       <v-layout row wrap>
-        <v-flex xs12 sm6 md4 lg3 v-for="mod in modules" :key="mod.mod_id" @click="handleClick(mod.mod_id)">
+        <v-flex xs12 sm6 md4 lg3 v-for="enrolled in mod.enrolled" :key="enrolled" @click="handleClick(enrolled)"> 
           <v-hover
         v-slot:default="{ hover }">
           <v-card class="text-center ma-3" :elevation="hover ? 16 : 2">  
-            {{mod.mod_id}} 
+             {{enrolled}} 
           </v-card>
           </v-hover>
           </v-flex>
@@ -37,7 +37,7 @@ export default {
     return {
       showModal: false,
       modules: [],
-      moduleInfo: [],
+
     };
   },
   
@@ -46,12 +46,12 @@ export default {
       //get students'ENROLMENTS from database
       var userID =  firebase.auth().currentUser.uid;
      //console.log(userID)
-      database.collection('enrolments').get().then((querySnapShot) =>{
+      database.collection('users').get().then((querySnapShot) =>{
         //loop
         let item = {}    
         querySnapShot.forEach(doc=>{
           item=doc.data()
-          if (item.user_id == userID) {
+          if (item.uid == userID) {
             this.modules.push(item)
             }
         })
