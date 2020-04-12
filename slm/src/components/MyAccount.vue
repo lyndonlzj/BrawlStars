@@ -50,7 +50,6 @@ export default {
     return {
       email: firebase.auth().currentUser.email,
       userid: firebase.auth().currentUser.uid,
-      itemsList: [],
       username:"",
     };
   },
