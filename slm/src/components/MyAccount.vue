@@ -3,21 +3,21 @@
     <Toolbar2></Toolbar2>
 
     <v-container class="fill-height" fluid>
-      <v-card class="mx-auto" max-width="500" outlined color="#f0eddf"> Welcome {{username}}</v-card>
+      <v-card class="mx-auto" max-width="500" outlined color="#f0eddf"> Hello {{username}}!</v-card>
     </v-container>
 
     <v-container class="fill-height" fluid>
-      <v-card class="mx-auto" max-width="500" outlined>
+      <v-card class="mx-auto" max-width="700" outlined>
         <v-list-item three-line>
           <v-list-item-content>
-            <div class="overline mb-4">Account Information</div>
+            <div class="overline mb-4">Your Account Information</div>
             <v-row>
               <v-col cols="12" sm="6">
                 <v-text-field id="userin" label="Username"></v-text-field>
                 <v-btn
                   id="b"
                   rounded
-                  color="#527c70"
+                  color="#9ACD32"
                   small
                   @click.prevent="updateName()"
                 >Change username</v-btn>
@@ -25,7 +25,7 @@
 
               <v-col cols="12" sm="6">
                 <v-text-field v-model="email" label="Your Email address"></v-text-field>
-                <v-btn rounded color="#527c70" small @click="resetPassword">Change password</v-btn>
+                <v-btn rounded color="#FF6347" small @click="resetPassword">Get link to change password</v-btn>
               </v-col>
             </v-row>
           </v-list-item-content>
