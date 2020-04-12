@@ -17,9 +17,9 @@
         <v-btn id="orderButton" @click.prevent="orderVotes()">Order by Upvotes</v-btn>
 
         <ul id="question-list"></ul>
-        <v-list v-for="item in itemsList" v-bind:key="item.question_id">
+        <v-list v-for="item in itemsList" v-bind:key="item.question_id"> 
           <v-card class="mx-auto" color="#f0eddf">
-            <v-list-item>
+            <v-list-item :to="{name:'q&a',params:{qid:item.question_id}}"> <!-- link to Q&A page-->
               <v-list-item-content>
                 <v-list-item-title class="headline">{{item.question}}</v-list-item-title>
                 <v-list-item-subtitle>by {{item.user_id}}</v-list-item-subtitle>
@@ -33,12 +33,6 @@
 
             {{item.votes}}
             <v-spacer></v-spacer>
-            
-          <v-btn text color="deep-purple accent-4" @click.prevent="answerQuestion(item, 
-          )">
-            Answer
-          </v-btn>
-
           </v-card>
         </v-list>
       </div>
@@ -76,16 +70,6 @@ export default {
       });
     },
     
-    answerQuestion: function(i) {
-      var ans = document.getElementById("answerBox").value;
-      var qid = i.question_id;
-      i.answer = ans;
-      database
-        .collection("questions")
-        .doc(qid)
-        .update({ answer: i.answer });
-
-    },
     
     upvoteQ: function(i) {
       var qid = i.question_id;
@@ -192,4 +176,5 @@ form:after {
 #page {
   background-color: #f0eddf;
 }
+
 </style>

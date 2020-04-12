@@ -15,6 +15,7 @@ import JoinCode from './components/JoinCode.vue'
 import CreateSession from './components/CreateSession.vue'
 import AskQuestion from './components/AskQuestion.vue'
 import ModuleSessList from './components/ModuleSessList.vue'
+import QNA from './components/QNSANS.vue'
 
 Vue.use(Router);
 
@@ -27,12 +28,13 @@ let router = new Router({
         { path: '/sessionpage', component: SessionPage, meta: { requiresAuth: true } },
         { path: '/about', component: About },
         { path: '/myaccount', component: MyAccount, meta: { requiresAuth: true } },
-        { path: '/sessiontrial/', component: SessionTrial, props:true, name:'sessionpage', meta: { requiresAuth: true }},
+        { path: '/sessiontrial/', component: SessionTrial, props:true, name:'sessiontrial', meta: { requiresAuth: true }},
         { path: '/joincode', component: JoinCode, name:'joincode', meta: { requiresAuth: true } },
         { path: '/createsession', component: CreateSession, meta: { requiresAuth: true } },
         { path: '/askquestion', component: AskQuestion, meta: { requiresAuth: true } },
         { path: '/modsess', name: 'module',props: true,component: ModuleSessList, meta: { requiresAuth: true } },
         { path: '*', component: NotFound, name: 'not found' },
+        { path: '/q&a', name: 'q&a', props: true, component: QNA, meta: { requiresAuth: true}}
     ],
     mode: 'history'
 });
