@@ -15,8 +15,15 @@
                   <v-text-field
                     label="Email"
                     type="text"
-                    prepend-icon="mdi-account-circle"
+                    prepend-icon="mdi-email"
                     v-model="email"
+                  />
+
+                  <v-text-field
+                    label="Username"
+                    type="text"
+                    prepend-icon="mdi-account-circle"
+                    v-model="username"
                   />
 
                   <v-text-field
@@ -50,6 +57,7 @@ export default {
   data() {
     return {
       email: '',
+      username:'',
       password: ''
     };
   },
@@ -63,6 +71,7 @@ export default {
       
           const account = {
             uid: user.user.uid,
+            username: this.username,
             email: user.user.email,
           }
 

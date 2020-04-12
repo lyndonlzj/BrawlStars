@@ -11,40 +11,22 @@
       <v-list-item-content>
         <div class="overline mb-4">Account Information</div>
         <v-row>
-          <v-col cols="12" sm="6">
-          <v-text-field
-            v-model="first"
-            label="First Name"
-          ></v-text-field>
-        </v-col>
 
           <v-col cols="12" sm="6">
           <v-text-field
-            v-model="last"
-            label="Last Name"
-          ></v-text-field>
-        </v-col>
-
-          <v-col cols="12" sm="6">
-          <v-text-field
-            v-model="user"
+            id = "userin"
+            v-model="username"
             label="Username"
           ></v-text-field>
-        </v-col>
-        
-
-          <v-col cols="12" sm="6">
-          <v-text-field
-            v-model="password"
-            label="Password"
-          ></v-text-field>
+          <v-btn id="b" rounded color="#527c70" small @click.prevent="updateName()">Change username</v-btn>
         </v-col>
 
           <v-col cols="12" sm="6">
           <v-text-field
             v-model="email"
-            label="Email address"
+            label="Your Email address"
           ></v-text-field>
+          <v-btn rounded color = "#527c70" small @click="resetPassword"> Change password</v-btn>
         </v-col>
 
         </v-row>
@@ -59,7 +41,8 @@
     </v-list-item>
 
     <v-card-actions>
-      <v-btn id="b" rounded color="#527c70" small>Save changes</v-btn>
+      
+      
     </v-card-actions>
   </v-card>
   </v-container>
@@ -68,17 +51,46 @@
 
 <script>
 import Toolbar2 from "../layouts/Toolbar2";
+import database from "../firebase.js"
+import firebase from "firebase";
+
   export default {
     components: {
       Toolbar2
     },
-    data: () => ({
-      first: 'John',
-      last: 'Doe',
-      user: 'johnnydoe',
-      password: '********',
-      email: 'john_doe@gmail.com'
-    }),
+    data(){
+      return {
+          email: firebase.auth().currentUser.email,
+          username:"",
+          
+      }
+    },
+    // firestore(){
+    //   const user = firebaseApp.auth().currentUser;
+    //   console.log(user.email)
+    //   return {
+    //     profile: database.collection('users').doc(user.uid),
+    //   }
+    // },
+    methods:{
+      updateName(){
+        var userid = firebase.auth().currentUser.uid;
+        var name = document.getElementById("userin").value;
+        database.collection('users')
+        .doc(userid)
+        .update({username: name});
+        console.log("got here")
+      },
+      resetPassword() {
+        const user = firebase.auth().currentUser;
+        const auth = firebase.auth();          
+          auth.sendPasswordResetEmail(auth.currentUser.email).then(() =>  {
+               alert(`Password reset sent to ${user.email}`);
+          }).catch((error) =>  {
+              console.log(error);
+          });
+      }
+    }
   
 };
 </script>
