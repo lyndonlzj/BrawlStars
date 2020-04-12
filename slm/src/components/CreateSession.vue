@@ -81,12 +81,12 @@ import firebase from "firebase";
           let item = {};
           //loop to check
           var snapshot = []
-          snapshot = querySnapShot.docs;
-          for(var k = 0; k <snapshot.length; k++){
-            item = querySnapShot.docs[k].data();
-            console.log(item.module_id);
-          }
-          console.log("print loop end");
+          // snapshot = querySnapShot.docs;
+          // for(var k = 0; k <snapshot.length; k++){
+          //   item = querySnapShot.docs[k].data();
+          //   console.log(item.module_id);
+          // }
+          // console.log("print loop end");
 
           for(var j = 0; j <snapshot.length; j++){
             const doc = querySnapShot.docs[j];
