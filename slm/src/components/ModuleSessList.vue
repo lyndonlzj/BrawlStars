@@ -52,17 +52,18 @@ export default {
     handleClick(sess) {
       console.log(sess)
       //get students'QUESTIONS from database
-      database.collection('questions').get().then((querySnapShot) =>{
+      this.$router.push({name: "sessionpage", params: {id: sess}});
+      /*database.collection('questions').get().then((querySnapShot) =>{
         //loop
         let item = {}   
         querySnapShot.forEach(doc=>{
           item=doc.data()
           if (item.session_id == sess) {
-            this.$router.push({name: "sessionpage", params: {id: sess}});
+            
           }
         })
       })
-      this.$router.push({name: "not found"})
+      this.$router.push({name: "not found"})*/
     },
     },
      created() {

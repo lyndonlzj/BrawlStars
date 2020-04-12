@@ -24,16 +24,12 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn id = "joinButton" @click.prevent="joinClick(joincode)">
-                  Join Session
-                </v-btn>
-
+                <v-btn id="joinButton" @click.prevent="joinClick(joincode)">Join Session</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
-
     </v-content>
   </v-app>
 </template>
@@ -41,6 +37,7 @@
 <script>
 import ToolbarEmptyLogo from '../layouts/ToolbarEmptyLogo'
 import database from "../firebase.js";
+import firebase from "firebase";
   export default {
     components: {
       ToolbarEmptyLogo,
@@ -48,45 +45,67 @@ import database from "../firebase.js";
     data() {
       return {
         joincode: "",
+        userid: firebase.auth().currentUser.uid,
+        sessionlist: [],
+        usermodulelist: [],
       }
     },
     methods:{
       joinClick(code) {
+        var modulename = code.split("-")[0];
+        console.log(this.sessionlist.length);
+        for (let i =0; i < this.sessionlist.length; i++) {
+          console.log(this.sessionlist[i]);
+          console.log(code);
+          if (this.sessionlist[i] === code) {
+            console.log("im in");
+            if (!this.usermodulelist.includes(modulename)) {
+              this.usermodulelist.push(modulename);
+              database.collection("users").doc(this.userid).update({enrolled: this.usermodulelist});
+            }
+            this.$router.push({name:"sessionpage", params: {id: code}});
+            return;
+          }
+        }
+        this.$router.push({name: "not found"});
+      }
+      
+    },
+    created(){
         database.collection('modules').get().then((querySnapShot) =>{
             //loop 
             let item = {} 
             querySnapShot.forEach(doc=>{
-                item = doc.data().sessions
+                item = doc.data().sessions;
                 for (let i=0; i < item.length; i++){
-                    if (item[i] == code) {
-                      this.$router.push({name: "sessionpage", params: {id: code}});
-                      break;
-                    }
+                  this.sessionlist.push(item[i]);
                 }
                 
             });
-    })
-    this.$router.push({name: "not found"})
+      });
+
+        database.collection('users').doc(this.userid).get().then((doc) =>{
+            this.usermodulelist = doc.get("enrolled") 
+      });
+
       }
-    }
   }
 </script>
 
 <style scoped>
-#a{
+#a {
   background-color: #f0eddf;
 }
 
 .change-font {
-    font-family: "Roboto", Helvetica, sans-serif;
-    font-weight: bold;
+  font-family: "Roboto", Helvetica, sans-serif;
+  font-weight: bold;
 }
 
-#rl{
-   background-color: #d97f76;
-   cursor: pointer;
-   color: black;
-   font-family: Roboto;
-
- }
+#rl {
+  background-color: #d97f76;
+  cursor: pointer;
+  color: black;
+  font-family: Roboto;
+}
 </style>
