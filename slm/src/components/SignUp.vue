@@ -73,6 +73,7 @@ export default {
             uid: user.user.uid,
             username: this.username,
             email: user.user.email,
+            enrolled : [],
           }
 
           firebase.firestore().collection('users').doc(user.user.uid).set(account);
