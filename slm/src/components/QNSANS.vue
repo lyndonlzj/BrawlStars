@@ -1,5 +1,5 @@
 <template>
-  <v-app id="page">
+  <v-app>
     <div>
     
     <!-- toolbar with back button --> 
@@ -16,13 +16,13 @@
     <v-menu left bottom></v-menu>
     </v-app-bar>
     </div>
-
-
-     <h1> Question: {{question}}</h1>
-     <h1> Answer: {{answer}}</h1>
+    <v-card class="mx-auto" elevation="12" width= "1000px">
+     <v-card-title> {{question}}</v-card-title>
+       <v-divider></v-divider>
+     <v-card-text>  {{answer}}</v-card-text>
      
      <form id="questionForm">
-          <input id="answerBox" type="text" name="answer" placeholder="Answer Here" />
+          <input id="answerBox" type="text" name="answer" placeholder="Type Your Answer Here" />
         
           <v-btn
             @click.prevent="answerQuestion()"
@@ -30,6 +30,7 @@
             color="#d97f76" 
           >Answer</v-btn>
         </form>
+    </v-card>
     </div>
   </v-app>
 </template>
@@ -125,6 +126,11 @@ form:after {
 
 #page {
   background-color: #f0eddf;
+}
+
+.mx-auto {
+  margin-top: 100px;
+  padding-bottom: 20px;
 }
 
 </style>

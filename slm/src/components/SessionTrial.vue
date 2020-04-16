@@ -1,10 +1,8 @@
 <template>
-  <v-app id="page">
-    <div>
+  <v-app>
       <Toolbar2></Toolbar2>
       <H1>{{id}}</H1>
-
-      <div class="content">
+      <div class="content" >
         <form id="questionForm">
           <input id="questionBox" type="text" name="question" placeholder="Ask here" />
           <v-btn
@@ -16,9 +14,8 @@
         </form>
         <v-btn id="orderButton" @click.prevent="orderVotes()">Order by Upvotes</v-btn>
 
-        <ul id="question-list"></ul>
         <v-list v-for="item in itemsList" v-bind:key="item.question_id"> 
-          <v-card class="mx-auto" color="#f0eddf">
+          <v-card class="mx-auto" elevation="12" width= "1200px">
             <v-list-item :to="{name:'q&a',params:{qid:item.question_id}}"> <!-- link to Q&A page-->
               <v-list-item-content>
                 <v-list-item-title class="headline">{{item.question}}</v-list-item-title>
@@ -30,14 +27,12 @@
             <v-btn icon @click.prevent="upvoteQ(item)">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
-
             {{item.votes}}
-            <v-spacer></v-spacer>
+            <!-- <v-spacer></v-spacer> -->
           </v-card>
         </v-list>
       </div>
-    </div>
-  </v-app>
+    </v-app>
 </template>
 
 <script>
@@ -163,18 +158,21 @@ form input {
 
 form input:focus {
   outline: none;
-  padding-bottom: 8px;
+  padding: 10px;
+
   transition: all ease 0.2s;
+
 }
 
 form:after {
   content: "";
   clear: both;
   display: block;
+  padding: 10px;
 }
 
-#page {
-  background-color: #f0eddf;
-}
+// #page {
+//   background-color: #f0eddf;
+// }
 
 </style>
