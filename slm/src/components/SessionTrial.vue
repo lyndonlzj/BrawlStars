@@ -2,6 +2,14 @@
   <v-app>
       <Toolbar2></Toolbar2>
       <H1>{{id}}</H1>
+      <wordcloud
+      :data="defaultWords"
+      nameKey="name"
+      valueKey="value"
+      :color="Accent"
+      :showTooltip="true"
+      :wordClick="wordClickHandler">
+      </wordcloud>
       <div class="content" >
         <form id="questionForm">
           <input id="questionBox" type="text" name="question" placeholder="Ask here" />
@@ -39,15 +47,19 @@
 import Toolbar2 from "../layouts/Toolbar2";
 import database from "../firebase.js";
 import firebase from "firebase";
+import wordcloud from 'vue-wordcloud'
 
 export default {
   components: {
-    Toolbar2
+    Toolbar2,
+    wordcloud
   },
   data: () => {
     return {
       itemsList: [],
-      id: ""
+      id: "",
+      words: [],
+      dict: {}
     };
   },
   methods: {
@@ -137,8 +149,45 @@ export default {
         }
       });
     });
+
+    database.collection('questions').get().then((querySnapShot) =>{
+            querySnapShot.forEach(doc=>{
+                var sid = doc.data().session_id;
+                if (this.id == sid) {
+                    var qn = doc.data().question.split(" ");
+                    console.log(qn)
+                    for (var i = 0; i < qn.length; i++) {
+                        if (!(qn[i] in this.dict)) {
+                            this.dict[qn[i]] = 1;
+                        } else {
+                            this.dict[qn[i]] = this.dict[qn[i]] + 1;
+                        }
+                    }
+                
+            }
+
+      
+      })
+    });
+    console.log(this.dict);
+
+    for (var key in this.dict) {
+        var temp = {};
+        temp["name"] = key;
+        temp["value"] = this.dict[key];
+        this.words.push(temp);
+        console.log(temp["name"]);
+        console.log(temp["value"]);
+    }
   }
-};
+}
+
+
+
+
+
+    
+
 </script>
 
 <style lang="scss" scoped>

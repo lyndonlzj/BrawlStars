@@ -18,7 +18,9 @@
     "save": "^2.4.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
-    "vuetify": "^2.2.11"
+    "vue-wordcloud": "^1.1.1",
+    "vuetify": "^2.2.11",
+    "vuewordcloud": "^18.7.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.0",
