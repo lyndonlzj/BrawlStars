@@ -28,36 +28,41 @@
           <input id="answerBox" type="text" name="answer" placeholder="Type Your Answer Here" />
 
           <v-btn @click.prevent="answerQuestion()" rounded color="#9ACD32">Answer</v-btn>
+          <v-btn
+            @click.prevent="deleteSpecificQuestionVisibility = true"
+            rounded
+            color="#d97f76"
+            style="margin-left: 20px"
+          >Delete my Answer</v-btn>
         </form>
       </v-card>
 
+      <!-- trying out the dialog for delete -->
+      <v-row justify="center">
+        <v-dialog v-model="deleteSpecificQuestionVisibility" max-width="290">
+          <v-card>
+            <v-card-title
+              class="error headline"
+              style="font-weight:bold; color:white"
+            >Delete answer?</v-card-title>
+            <v-card-text>This action is not reversible</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn flat @click="displayDialogs[key] = false">Cancel</v-btn>
+              <v-btn color="error" flat @click.prevent="deleteMyAnswer()">Confirm</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+      <!-- trying out dialog for delete -->
+
       <!-- attempt at forum style -->
-      <v-list id = "cardlist" v-for="(value,key) in ansMap" v-bind:key="key">
+      <v-list id="cardlist" v-for="(value,key) in ansMap" v-bind:key="key">
         <v-card class="mx-auto" elevation="12" width="1200px" align="left">
-          <v-list-item-content>
+          <v-list-item-content style="margin-left: 15px">
             <v-list-item-title class="headline">{{value}}</v-list-item-title>
             <v-list-item-subtitle>by {{key}}</v-list-item-subtitle>
           </v-list-item-content>
-          <v-btn @click="changeTrue(key)" rounded color="#d97f76">Delete</v-btn>
-
-          <!-- trying out the dialog for delete -->
-          <v-row justify="center">
-            <v-dialog v-model="displayDialogs[key]" max-width="290">
-              <v-card>
-                <v-card-title
-                  class="error headline"
-                  style="font-weight:bold; color:white"
-                >Delete answer?</v-card-title>
-                <v-card-text>This action is not reversible</v-card-text>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn flat @click="displayDialogs[key] = false">Cancel</v-btn>
-                  <v-btn color="error" flat @click.prevent="deleteAnswer(key,value)">Confirm</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
-          <!-- trying out dialog for delete -->
         </v-card>
       </v-list>
     </div>
@@ -89,10 +94,10 @@ export default {
     },
     answerQuestion: function() {
       var ans = document.getElementById("answerBox").value;
-      if(ans.length >60){
-          alert("Answer is too long (Max. 60 Characters)");
-          document.getElementById("answerBox").value = "";
-          return;
+      if (ans.length > 60) {
+        alert("Answer is too long (Max. 60 Characters)");
+        document.getElementById("answerBox").value = "";
+        return;
       }
       var qid = this.id;
 
@@ -129,19 +134,31 @@ export default {
           .update({ answer: this.ansMap });
         return;
       }
+    },
+
+  deleteMyAnswer: function() {
+    var userEmail = firebase.auth().currentUser.email;
+    if (userEmail in this.ansMap) {
+      delete this.ansMap[userEmail];
+      database
+        .collection("questions")
+        .doc(this.id)
+        .update({ answer: this.ansMap });
+
+      alert("Your answer has been successfully deleted");
+      this.deleteSpecificQuestionVisibility = false;
+      return;
+    } else {
+      alert("You have yet to answer this question");
+      this.deleteSpecificQuestionVisibility = false;
+      return;
     }
+  }
   },
+  
 
   created() {
     this.id = this.$route.params.qid;
-    // let docref = database.collection("questions").doc(this.id);
-    // docref.get().then(snapshot => {
-    //   this.question = snapshot.data().question;
-    //   this.ansMap = snapshot.data().answer;
-    //   console.log(this.ansMap);
-    //   this.modID = snapshot.data().session_id;
-    // });
-
     database.collection("questions").onSnapshot(res => {
       const changes = res.docChanges();
       changes.forEach(change => {
@@ -201,6 +218,5 @@ form:after {
 .mx-auto {
   margin-top: 10px;
   padding-bottom: 10px;
-  
 }
 </style>
