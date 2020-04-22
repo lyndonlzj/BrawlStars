@@ -48,7 +48,7 @@
             <v-card-text>This action is not reversible</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn flat @click="displayDialogs[key] = false">Cancel</v-btn>
+              <v-btn flat @click="deleteSpecificQuestionVisibility = false">Cancel</v-btn>
               <v-btn color="error" flat @click.prevent="deleteMyAnswer()">Confirm</v-btn>
             </v-card-actions>
           </v-card>

@@ -1,25 +1,19 @@
 <template>
   <v-app>
       <Toolbar2></Toolbar2>
-      <H1>Session Code: {{id}}</H1>
-      <div v-if="displayWordCloud"> 
+      <H1 style="background-color:#f0eddf;padding-left:10px"> Session Code: {{id}}</H1>
+      <div v-if="displayWordCloud" style="background-color:#f0eddf"> 
       <wordcloud
       :data="words"
       nameKey="name"
       valueKey="value"
       :color="Accent"
       :showTooltip="true"
-      :wordClick="wordClickHandler">
+      :wordClick="wordClickHandler"
+      style="background-color:#f0eddf;padding:0;margin:0">
       </wordcloud>
       </div>
-      <v-btn
-            id="wordcloud"
-            @click.prevent="wordCloud()"
-            rounded
-            color="#d97f76"
-          >Show Word Cloud</v-btn>
-
-      <div class="content" >
+      <div class="content" style="background-color:#f0eddf">
         <form id="questionForm">
           <input id="questionBox" type="text" name="question" placeholder="Ask here" />
           <v-btn
@@ -28,10 +22,17 @@
             rounded
             color="#d97f76"
           >Ask Question</v-btn>
+          <v-btn
+            id="wordcloud"
+            @click.prevent="wordCloud()"
+            rounded
+            color="#FFE333"
+            style="margin-left: 10px"
+          >Toggle Word Cloud</v-btn>
         </form>
-        <v-btn id="orderButton" @click.prevent="orderVotes()">Order by Upvotes</v-btn>
+        <v-btn id="orderButton" @click.prevent="orderVotes()" style="margin-left: 32px">Order by Upvotes</v-btn>
 
-        <v-list v-for="item in itemsList" v-bind:key="item.question_id"> 
+        <v-list id="questionlist" v-for="item in itemsList" v-bind:key="item.question_id"> 
           <v-card class="mx-auto" elevation="12" width= "1200px">
             <v-list-item :to="{name:'q&a',params:{qid:item.question_id}}"> <!-- link to Q&A page-->
               <v-list-item-content>
@@ -85,6 +86,7 @@ export default {
         answer: {},
         user_id: firebase.auth().currentUser.email
       });
+      document.getElementById("questionBox").value = "";
     },
     
     
@@ -113,6 +115,7 @@ export default {
     },
 
     wordCloud: function() {
+      this.words = [];
       for (var key in this.dict) {
           var temp = {};
           temp["name"] = key;
@@ -196,17 +199,18 @@ form input {
   display: block;
   box-sizing: border-box;
   font-size: 18px;
-  background-color: #8eb4c5;
+  background-color: #ffffff;
   border-color: black;
 }
 
-form input:focus {
-  outline: none;
-  padding: 10px;
 
-  transition: all ease 0.2s;
+// form input:focus {
+//   outline: none;
+//   padding: 10px;
 
-}
+//   transition: all ease 0.2s;
+
+// }
 
 form:after {
   content: "";
@@ -215,8 +219,17 @@ form:after {
   padding: 10px;
 }
 
-// #page {
-//   background-color: #f0eddf;
-// }
+#questionlist {
+  background-color: #f0eddf;
+}
+
+
+#page {
+  background-color: #f0eddf;
+}
+
+template {
+  background-color: #f0eddf;
+}
 
 </style>
