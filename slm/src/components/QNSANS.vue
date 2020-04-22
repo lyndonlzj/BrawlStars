@@ -38,6 +38,7 @@
 <script>
 import database from "../firebase.js";
 
+
 export default {
   components: {
     
@@ -65,22 +66,22 @@ export default {
     },
 
 
-    fetchItems: function() {
-      database
-        .collection("questions")
-        .get()
-        .then(querySnapShot => {
-          let question = {};
-          querySnapShot.forEach(doc => {
-            question = doc.data();
-            if (question.session_id == this.id) {
-              console.log(question.session_id);
-              question.show = true;
-              this.itemsList.push(question);
-            }
-          });
-        });
-    },
+    // fetchItems: function() {
+    //   database
+    //     .collection("questions")
+    //     .get()
+    //     .then(querySnapShot => {
+    //       let question = {};
+    //       querySnapShot.forEach(doc => {
+    //         question = doc.data();
+    //         if (question.session_id == this.id) {
+    //           console.log(question.session_id);
+    //           question.show = true;
+    //           this.itemsList.push(question);
+    //         }
+    //       });
+    //     });
+    // },
 
   },
 

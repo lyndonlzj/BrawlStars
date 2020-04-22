@@ -14,7 +14,8 @@ import JoinCode from './components/JoinCode.vue'
 import CreateSession from './components/CreateSession.vue'
 import AskQuestion from './components/AskQuestion.vue'
 import ModuleSessList from './components/ModuleSessList.vue'
-import QNA from './components/QNSANS.vue'
+// import QNA from './components/QNSANS.vue'
+import QNA from './components/QnForum.vue'
 
 Vue.use(Router);
 

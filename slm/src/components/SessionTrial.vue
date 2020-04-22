@@ -1,7 +1,7 @@
 <template>
   <v-app>
       <Toolbar2></Toolbar2>
-      <H1>{{id}}</H1>
+      <H1>Session Code: {{id}}</H1>
       <div class="content" >
         <form id="questionForm">
           <input id="questionBox" type="text" name="question" placeholder="Ask here" />
@@ -22,7 +22,6 @@
                 <v-list-item-subtitle>by {{item.user_id}}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-            <v-card-text>{{item.answer}}</v-card-text>
 
             <v-btn icon @click.prevent="upvoteQ(item)">
               <v-icon>mdi-heart</v-icon>
@@ -51,8 +50,9 @@ export default {
     };
   },
   methods: {
-
+    
     postQuestion: function() {
+
       var qn = document.getElementById("questionBox").value;
       const ref = database.collection("questions").doc();
       ref.set({
@@ -60,7 +60,7 @@ export default {
         question: qn,
         votes: 0,
         session_id: this.id,
-        answer: " ",
+        answer: {},
         user_id: firebase.auth().currentUser.email
       });
     },
@@ -73,23 +73,6 @@ export default {
         .collection("questions")
         .doc(qid)
         .update({ votes: i.votes });
-    },
-
-    fetchItems: function() {
-      database
-        .collection("questions")
-        .get()
-        .then(querySnapShot => {
-          let question = {};
-          querySnapShot.forEach(doc => {
-            question = doc.data();
-            if (question.session_id == this.id) {
-              console.log(question.session_id);
-              question.show = true;
-              this.itemsList.push(question);
-            }
-          });
-        });
     },
 
     orderVotes: function() {
