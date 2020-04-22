@@ -2,14 +2,23 @@
   <v-app>
       <Toolbar2></Toolbar2>
       <H1>Session Code: {{id}}</H1>
+      <div v-if="displayWordCloud"> 
       <wordcloud
-      :data="defaultWords"
+      :data="words"
       nameKey="name"
       valueKey="value"
       :color="Accent"
       :showTooltip="true"
       :wordClick="wordClickHandler">
       </wordcloud>
+      </div>
+      <v-btn
+            id="wordcloud"
+            @click.prevent="wordCloud()"
+            rounded
+            color="#d97f76"
+          >Show Word Cloud</v-btn>
+
       <div class="content" >
         <form id="questionForm">
           <input id="questionBox" type="text" name="question" placeholder="Ask here" />
@@ -58,7 +67,8 @@ export default {
       itemsList: [],
       id: "",
       words: [],
-      dict: {}
+      dict: {},
+      displayWordCloud: false
     };
   },
   methods: {
@@ -102,6 +112,18 @@ export default {
     });
     },
 
+    wordCloud: function() {
+      for (var key in this.dict) {
+          var temp = {};
+          temp["name"] = key;
+          temp["value"] = this.dict[key];
+          this.words.push(temp);
+          console.log(temp["name"]);
+          console.log(temp["value"]);
+      }
+      this.displayWordCloud = !this.displayWordCloud
+      console.log(this.words)
+    }
   },
 
   created() {
@@ -152,16 +174,6 @@ export default {
       
       })
     });
-    console.log(this.dict);
-
-    for (var key in this.dict) {
-        var temp = {};
-        temp["name"] = key;
-        temp["value"] = this.dict[key];
-        this.words.push(temp);
-        console.log(temp["name"]);
-        console.log(temp["value"]);
-    }
   }
 }
 
