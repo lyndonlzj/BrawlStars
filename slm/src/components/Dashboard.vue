@@ -18,7 +18,14 @@
           </v-flex>
          </v-layout>
          </v-container>       
-    </div> 
+    </div>
+    <bar :labels="labels" :datasets="datasets"></bar>
+    <v-btn
+            id="qn"
+            @click.prevent="qn()"
+            rounded
+            color="#d97f76"
+          >fuck</v-btn>
   </v-app>
   </div>
 </template>
@@ -28,16 +35,23 @@ import Toolbar2 from "../layouts/Toolbar2";
 import database from "../firebase.js";
 import firebase from 'firebase';
 //import moment from 'moment';
+import bar from "./bar.js"
 
 export default {
   components: {
-    Toolbar2
+    Toolbar2, bar
   },
   data: () => {
     return {
       showModal: false,
       modules: [],
-
+      labels: [],
+      datasets: [
+        {
+          label: "bar",
+          data: []
+        }
+      ]
     };
   },
   
@@ -50,22 +64,50 @@ export default {
         //loop
         let item = {}    
         querySnapShot.forEach(doc=>{
+          console.log("bye")
           item=doc.data()
           if (item.uid == userID) {
             this.modules.push(item)
-            }
+            this.labels = item.enrolled
+          }
         })
+      
       })
     },
+    
+    qn: function(){
+      console.log("hi")
+      
+      for (var i = 0 ; i < this.labels[0].length; i++) {
+        this.datasets[0].data.push(0)
+      }
+      
+      database.collection('questions').get().then((querySnapShot) => {
+        querySnapShot.forEach(doc=> {
+          var modcode = doc.data().session_id.split("-")[0]
+          
+          if (modcode in this.labels[0]) {
+              var modIndex = this.labels.indexOf(modcode)         
+              this.datasets[0].data[modIndex] = this.datasets[0].data[modIndex] + 1
+          }
+        })
+      })
+      console.log(this.modules)
+      console.log(this.labels)
+      console.log(this.datasets)
+    },
+      
     handleClick(mod) {
         this.$router.push({name: "module", params: { mod: mod}});
     },
     },
-    created() {
+    created() { 
       this.fetchItems()
+      console.log(this.modules)
+      console.log(this.labels)
+      console.log(this.datasets)
     }
   }
-
 </script>
 
 <style lang="scss" scoped>
@@ -80,5 +122,4 @@ export default {
   width: 100vw;
   overflow-x: hidden;
 }
-
 </style>
