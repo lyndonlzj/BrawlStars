@@ -3,6 +3,7 @@
     <v-app>
     <Toolbar2></Toolbar2>
     <div id="dashboard">
+      <h2 id = "welcomeuser">Welcome</h2>
       <h2>Dashboard</h2>
       <h4 font-weight="bold">Your Enrolled Modules</h4>
       <!-- going through the modules -->
@@ -17,26 +18,43 @@
           </v-hover>
           </v-flex>
          </v-layout>
-         </v-container>       
+         </v-container>      
+         <!-- <!-v-btn id="analytics" @click.prevent="analytics()">Analytics<!/v-btn>  -->
+         <div id = "charts">
+         <div id ="myCharts">
+         <BarChart></BarChart>
+         </div>
+         <div id ="myCharts">
+         <DoughnutChart></DoughnutChart>
+         </div>
+         </div>
     </div> 
   </v-app>
   </div>
 </template>
 
 <script>
+//import LineExample from '../modqnstats.js'
 import Toolbar2 from "../layouts/Toolbar2";
 import database from "../firebase.js";
 import firebase from 'firebase';
+import BarChart from '../barchart.js'
+import DoughnutChart from '../doughnut.js'
+
 //import moment from 'moment';
 
 export default {
   components: {
-    Toolbar2
+    Toolbar2, BarChart, DoughnutChart
   },
   data: () => {
     return {
       showModal: false,
       modules: [],
+      modulelist: [],
+      questiondict:{},
+      username: "",
+      displaybarchart: false
 
     };
   },
@@ -50,21 +68,69 @@ export default {
         //loop
         let item = {}    
         querySnapShot.forEach(doc=>{
+          console.log("fetchItems")
           item=doc.data()
           if (item.uid == userID) {
-            this.modules.push(item)
+            this.modules.push(item);
+            for (var x = 0; x < item.enrolled.length; x++) {
+              this.modulelist[x] = item.enrolled[x];
+            }
             }
         })
       })
+
+      
     },
+
+
+   /* analytics() {
+      database.collection('questions').get().then((querySnapShot) => {
+        
+        querySnapShot.forEach(doc=> {
+          var x = doc.data().session_id;
+          console.log(this.modulelist)
+          console.log(x.split("-")[0])
+          console.log(this.modulelist.includes(x.split("-")[0]))
+          if(this.modulelist.includes(x.split("-")[0])) {
+            if (!(x in this.questiondict)) {
+              this.questiondict[x] = 1;
+            }
+            else {
+              this.questiondict[x] = this.questiondict[x] + 1;
+            }
+          }
+        })
+       for (var key in this.questiondict) {
+         console.log("jwofjw")
+          this.datacollection.labels.push(key);
+          this.datacollection.datasets[0].data.push(this.questiondict[key]); 
+       }
+       console.log(this.datacollection.labels)
+       console.log(this.datacollection.datasets[0].data)
+      })
+      this.renderChart(this.datacollection, this.options)
+
+      this.displaybarchart = !this.displaybarchart;
+    },*/
     handleClick(mod) {
         this.$router.push({name: "module", params: { mod: mod}});
+    },
+
+   
+
+    welcome() {
+      var userid = firebase.auth().currentUser.uid;
+      database.collection('users').doc(userid).get().then((doc) => {
+      this.username = doc.get("username")
+      document.getElementById("welcomeuser").innerHTML = "Welcome " + this.username;
+    })
     },
     },
     created() {
       this.fetchItems()
-    }
-  }
+      this.welcome()
+    },
+}
 
 </script>
 
@@ -80,5 +146,25 @@ export default {
   width: 100vw;
   overflow-x: hidden;
 }
+
+#myCharts {
+height:50%;
+  width:50%;
+  border-style: solid;
+  border-color:rgb(155, 84, 84);
+  border-width: 1px;
+  float:left;
+}
+
+#charts {
+    content:"";
+    display:table;
+    clear:both;
+}
+
+#welcomeuser {
+  font-family: "actor";  
+}
+
 
 </style>
