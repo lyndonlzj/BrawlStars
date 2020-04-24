@@ -12,6 +12,8 @@
       :color="Accent"
       :showTooltip="true"
       :wordClick="wordClickHandler"
+      :rotate="{from:-15,to:15,numOfOrientation:5}"
+      :fontSize="[30,100]"
       style="background-color:#f0eddf;padding:0;margin:0">
       </wordcloud>
       </div>
