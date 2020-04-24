@@ -68,7 +68,6 @@ export default {
         //loop
         let item = {}    
         querySnapShot.forEach(doc=>{
-          console.log("fetchItems")
           item=doc.data()
           if (item.uid == userID) {
             this.modules.push(item);
@@ -83,35 +82,7 @@ export default {
     },
 
 
-   /* analytics() {
-      database.collection('questions').get().then((querySnapShot) => {
-        
-        querySnapShot.forEach(doc=> {
-          var x = doc.data().session_id;
-          console.log(this.modulelist)
-          console.log(x.split("-")[0])
-          console.log(this.modulelist.includes(x.split("-")[0]))
-          if(this.modulelist.includes(x.split("-")[0])) {
-            if (!(x in this.questiondict)) {
-              this.questiondict[x] = 1;
-            }
-            else {
-              this.questiondict[x] = this.questiondict[x] + 1;
-            }
-          }
-        })
-       for (var key in this.questiondict) {
-         console.log("jwofjw")
-          this.datacollection.labels.push(key);
-          this.datacollection.datasets[0].data.push(this.questiondict[key]); 
-       }
-       console.log(this.datacollection.labels)
-       console.log(this.datacollection.datasets[0].data)
-      })
-      this.renderChart(this.datacollection, this.options)
-
-      this.displaybarchart = !this.displaybarchart;
-    },*/
+   
     handleClick(mod) {
         this.$router.push({name: "module", params: { mod: mod}});
     },
@@ -122,7 +93,7 @@ export default {
       var userid = firebase.auth().currentUser.uid;
       database.collection('users').doc(userid).get().then((doc) => {
       this.username = doc.get("username")
-      document.getElementById("welcomeuser").innerHTML = "Welcome " + this.username;
+      document.getElementById("welcomeuser").innerHTML = "Welcome " + this.username + "!";
     })
     },
     },
@@ -164,6 +135,7 @@ height:50%;
 
 #welcomeuser {
   font-family: "actor";  
+  font-size: 50px;
 }
 
 

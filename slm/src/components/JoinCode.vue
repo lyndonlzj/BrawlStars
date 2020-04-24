@@ -53,10 +53,7 @@ import firebase from "firebase";
     methods:{
       joinClick(code) {
         var modulename = code.split("-")[0];
-        console.log(this.sessionlist.length);
         for (let i =0; i < this.sessionlist.length; i++) {
-          console.log(this.sessionlist[i]);
-          console.log(code);
           if (this.sessionlist[i] === code) {
             console.log("im in");
             if (!this.usermodulelist.includes(modulename)) {
