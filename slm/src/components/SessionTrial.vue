@@ -1,5 +1,7 @@
 <template>
+ <div>
   <v-app>
+   
       <Toolbar2></Toolbar2>
       <H1 style="background-color:#f0eddf;padding-left:10px"> Session Code: {{id}}</H1>
       <div v-if="displayWordCloud" style="background-color:#f0eddf"> 
@@ -50,6 +52,7 @@
         </v-list>
       </div>
     </v-app>
+    </div>
 </template>
 
 <script>
